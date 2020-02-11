@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_sheet.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <title> متحقق السجلات</title>
+  </head>
+  <body>
+    <div>
+      <div class="header">
+          <h1>متحقق سجلات نطاق سياسة المرسل   </h1>
+          <p> </p>
+          <br><br>
+      </div>
+      <div class="topnav">
+        <a href="\" style="float:right">العودة للصفحة الرئيسية</a>
+      </div>
+      <div class="container" >
+        <br><br><br>
+        {# domain name and spf record #}
+        {% for item in record %}
+          {% for key, value in item.items() %}
+              <h5 style="color: #c0a16b" >  {{ key }}</h5>
+              <h5>   {{value}} </h5>
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="container"  align="right" dir="rtl">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"> # </th>
+              <th scope="col">التحقق</th>
+              <th scope="col">النتيجة</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for item in result%}
+              {% if item.color=='red' %}
+                  <tr style="background-color: #ffb3b3">
+              {% elif item.color=='green' %}
+                  <tr style="background-color: #e6ffe6">
+              {% endif %}
+                    <td>{{  loop.index }} </td>
+                    <td >{{ item.test}}</td>
+                    <td >{{ item.result}}</td>
+                  </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <br>     <br>
+     <div class="container"  align="right" dir="rtl">
+       {% if mechanisms|length >0 %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"> الإشارة</th>
+                <th scope="col"> المعنى</th>
+                <th scope="col">تفاصيل السجل</th>
+                <th scope="col">   </th>
+                <th scope="col"> الوصف</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in mechanisms%}
+                <tr>
+                    <td>{{  item.prefix }} </td>
+                    <td >{{ item.action}}</td>
+                    <td >{{ item.mechanism}}</td>
+                    <td > </td>
+                    <td >{{ item.description}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+       {% endif %}
+    </div></div>
+    <div class="footer">
+            <p> </p>
+    </div>
+    
+  </body>
+
+</html>
