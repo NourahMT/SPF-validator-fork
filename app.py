@@ -1,3 +1,5 @@
+#!/user/bin/env python3
+
 from flask import Flask, render_template, request, Response
 import re
 import dns
@@ -6,9 +8,12 @@ from netaddr import *
 from collections import Counter
 
 """
-  This tool built to validate SPF in a specific domain DNS TXT record.
+
+	This tool is built to validate the SPF(Sender Policy Framework) record of a given domain.
+ 
 
 """
+ 
 
 def spf_validation(domain):
     spf = Spf(domain)
@@ -20,13 +25,17 @@ def spf_validation(domain):
 class Spf:
     
     '''
-    spf class get and validate spf record for each domain
-    and write result in two csv files
+ 
     validation criteria:
-    1-starts with v=spf1 2-ends with all
-    3-no extra spaces  4-number of DNS lookup<10
-    5-string length<255  6- no unknown mechanism
-    7- only one spf record 8- no duplicate ip address
+    
+    1-starts with v=spf1  
+    2-ends with all
+    3-no extra spaces 
+    4-number of DNS lookup<10
+    5-string length<255 
+    6- no unknown mechanism
+    7- only one spf record 
+    8- no duplicate ip address
     9- void lookups < 2
 
     '''
@@ -48,10 +57,10 @@ class Spf:
         self.check_duplicateIP()
         if self.recursion > 10:  # no lookup
             self.test_result.append(
-                {'test': (u'  عدد مرات البحث من الخادم تجاوز الحد ١٠'), 'result': u'نعم', 'color': 'red'})
+                {'test': (u'  عدد مرات البحث من الخادم تجاوز الحد ١٠'), 'result': u'نعم', 'status': 'fail'})
         else:
             self.test_result.append(
-                {'test': (u'  عدد مرات البحث من الخادم تجاوز الحد ١٠'), 'result': u'لا', 'color': 'green'})
+                {'test': (u'  عدد مرات البحث من الخادم تجاوز الحد ١٠'), 'result': u'لا', 'status': 'pass'})
 
 
         return self.test_result, self.record, self.mechanisms_result
@@ -96,17 +105,17 @@ class Spf:
 
             if count > 1:
                 if domain == self.domain:
-                    self.test_result.append({'test': u'  عدد السجلات ', 'result': '%d' % count, 'color': 'red'})
+                    self.test_result.append({'test': u'  عدد السجلات ', 'result': '%d' % count, 'status': 'fail'})
 
             if count == 1:
                 if domain == self.domain:
-                    self.test_result.append({'test': u'  عدد السجلات ', 'result': '%d' % count, 'color': 'green'})
+                    self.test_result.append({'test': u'  عدد السجلات ', 'result': '%d' % count, 'status': 'pass'})
 
             if count == 0:
                 if domain == self.domain:
-                    self.test_result.append({'test': u'  عدد السجلات ', 'result': u'لا يوجد ', 'color': 'red'})
+                    self.test_result.append({'test': u'  عدد السجلات ', 'result': u'لا يوجد ', 'status': 'fail'})
                     condition = False
-                    print(condition)
+      
 
             return condition, spf_list
 
@@ -130,17 +139,17 @@ class Spf:
             if 'NOERROR' or 'NXDOMAIN' in s:
                 self.void_lookup = self.void_lookup + 1
             condition = False
-            self.test_result.append({'test': ' ', 'result': str(e), 'color': 'red'})
+            self.test_result.append({'test': ' ', 'result': str(e), 'status': 'fail'})
 
         return condition, item_list
 
     def end_with_all(self, spf, domain):
         if not spf.endswith('all'):
             if domain == self.domain:
-                self.test_result.append({'test': (u'ينتهي السجل ب' 'all'), 'result': u'لا', 'color': 'red'})
+                self.test_result.append({'test': (u'ينتهي السجل ب' 'all'), 'result': u'لا', 'status': 'fail'})
 
         if domain == self.domain:
-            self.test_result.append({'test': (u'ينتهي السجل ب' 'all'), 'result': u'نعم', 'color': 'green'})
+            self.test_result.append({'test': (u'ينتهي السجل ب' 'all'), 'result': u'نعم', 'status': 'pass'})
 
     def check_spaces(self, spf, domain):
         s = spf.split(' ')
@@ -160,10 +169,10 @@ class Spf:
         s = spf.split(' ')
         if len(s) > 255:
             if domain == self.domain:
-                self.test_result.append({'test': (u' تجاوز عدد الأحرف المسموح بها'), 'result': u'نعم', 'color': 'red'})
+                self.test_result.append({'test': (u' تجاوز عدد الأحرف المسموح بها'), 'result': u'نعم', 'status': 'fail'})
 
         if domain == self.domain:
-            self.test_result.append({'test': (u' تجاوز عدد الأحرف المسموح بها'), 'result': u'لا', 'color': 'green'})
+            self.test_result.append({'test': (u' تجاوز عدد الأحرف المسموح بها'), 'result': u'لا', 'status': 'pass'})
 
     def process_mechanisms(self, domain, spf):
         spf = spf[7:]  # v=spf1
@@ -332,7 +341,7 @@ class Spf:
 
         elif rule[:3] == 'ptr':
             if domain == self.domain:
-                self.test_result.append({'test': (u'ptr(Pointer) للإشارة إلى إسم النطاق من خلال العنوان'), 'result': u'  ينصح بعدم ادراج هذه السجلات', 'color': 'red'})
+                self.test_result.append({'test': (u'ptr(Pointer) للإشارة إلى إسم النطاق من خلال العنوان'), 'result': u'  ينصح بعدم ادراج هذه السجلات', 'status': 'fail'})
             self.recursion = self.recursion + 1
             if self.recursion > 10:
                 return stop
@@ -379,9 +388,9 @@ class Spf:
                     self.duplicate_ip.append(address)
 
         if len(self.duplicate_ip) > 0:
-            self.test_result.append({'test': (u' يحتوي على عنواين مكررة'), 'result': u'نعم', 'color': 'red'})
+            self.test_result.append({'test': (u' يحتوي على عنواين مكررة'), 'result': u'نعم', 'status': 'fail'})
 
-        self.test_result.append({'test': (u' يحتوي على عنواين مكررة'), 'result': u'لا', 'color': 'green'})
+        self.test_result.append({'test': (u' يحتوي على عنواين مكررة'), 'result': u'لا', 'status': 'pass'})
 
 
 # app section

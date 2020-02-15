@@ -1,36 +1,39 @@
 <!doctype html>
-<html>
+<html dir="rtl" lang="ar">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <!--CSS files -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_sheet.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-rtl.min.css') }}">
+ 
+ 
     <title>متحقق السجلات</title>
   </head>
 
   <body>
-    <div align="right" dir="rtl" >
+    <div>
       <div class="header">
-        <h1>متحقق سجلات نطاق سياسة المرسل   </h1>
+        <h1>متحقق سجلات نطاق سياسة المرسل</h1>
         <p> </p>
         <br><br>
       </div>
 
       <div class="topnav">
-        <a href="\" style="float:right">الصفحة الرئيسية</a>
+        <a href="\" >الصفحة الرئيسية</a>
       </div>
 
       <div class="row">
-        <div class="container" align="right" dir="rtl" >
+        <div class="container" >
           <br>
           <br>
           <br>
           <form method="post" action="/postdata" name="domainform" onsubmit="return validate()">
-              <div class="form-group" align="right" dir="rtl" >
-                  <label for="domain" align="right" dir="rtl" >  <h5> ادخل إسم النطاق</h5> </label>
-                  <input type="text" class="form-control" id="domain_name" name="domain_name"  placeholder="example.com.sa" required/>
-                  <div id="domain_error" >
+              <div class="form-group">
+                  <label for="domain"> <h5> ادخل إسم النطاق</h5> </label>
+                  <input type="text" class="form-control" id="domain_name" name="domain_name"  placeholder="example.com" required/>
+                  <div class="domain_error" >
                         {{ msg }}
                   </div>
               </div>
@@ -39,11 +42,6 @@
           </form>
         </div>
       </div>
-
-      <div class="footer">
-            <p> </p>
-      </div>
-
     </div>
   </body>
 </html>
@@ -52,9 +50,9 @@
 
       function validate() {
       //only accept letters, numbers and (.)
-      //string length( min 4 max 40)
+      //string length( min 4 max 30)
 
-        var regex = /^[a-z0-9.]{4,40}$/i;
+        var regex = /^[a-z0-9.]{4,30}$/i;
         var domain= document.forms["domainform"]["domain_name"].value;
         if (!(regex.test(domain))) {
           alert(" الرجاء كتابة اسم النطاق بشكل صحيح ");

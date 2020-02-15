@@ -1,36 +1,38 @@
 <!doctype html>
-<html>
+<html dir="rtl" lang="ar">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_sheet.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-rtl.min.css') }}">
 
     <title> متحقق السجلات</title>
   </head>
   <body>
     <div>
       <div class="header">
-          <h1>متحقق سجلات نطاق سياسة المرسل   </h1>
+          <h1>متحقق سجلات نطاق سياسة المرسل</h1>
           <p> </p>
           <br><br>
       </div>
       <div class="topnav">
-        <a href="\" style="float:right">العودة للصفحة الرئيسية</a>
+        <a href="\">العودة للصفحة الرئيسية</a>
       </div>
       <div class="container" >
         <br><br><br>
         {# domain name and spf record #}
         {% for item in record %}
           {% for key, value in item.items() %}
-              <h5 style="color: #c0a16b" >  {{ key }}</h5>
-              <h5>   {{value}} </h5>
+              <h5 class="title">  {{ key }}</h5>
+              <h5 class="record_details">  {{value}} </h5>
           {% endfor %}
         {% endfor %}
       </div>
-      <div class="container"  align="right" dir="rtl">
-        <table class="table table-striped">
+      
+      <div class="container"  >
+        <table class="table">
           <thead>
             <tr>
               <th scope="col"> # </th>
@@ -41,10 +43,10 @@
           <tbody>
 
             {% for item in result%}
-              {% if item.color=='red' %}
-                  <tr style="background-color: #ffb3b3">
-              {% elif item.color=='green' %}
-                  <tr style="background-color: #e6ffe6">
+              {% if item.status=='fail' %}
+                  <tr class="fail">
+              {% elif item.status=='pass' %}
+                  <tr class="pass">
               {% endif %}
                     <td>{{  loop.index }} </td>
                     <td >{{ item.test}}</td>
@@ -55,8 +57,8 @@
         </table>
       </div>
 
-      <br>     <br>
-     <div class="container"  align="right" dir="rtl">
+      <br><br>
+     <div class="container" >
        {% if mechanisms|length >0 %}
           <table class="table table-striped">
             <thead>
@@ -82,9 +84,7 @@
           </table>
        {% endif %}
     </div></div>
-    <div class="footer">
-            <p> </p>
-    </div>
+ 
     
   </body>
 
