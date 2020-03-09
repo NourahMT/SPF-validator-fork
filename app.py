@@ -406,12 +406,24 @@ def main():
 def result():
 
     domain_name = request.form['domain_name']
-    #remove any tags
-    TAG_RE = re.compile(r'<[^>]+>')
-    domain_name = TAG_RE.sub('', domain_name).strip()
-    result, record, mechanisms = spf_validation(domain_name)
+    '''	
+    	Re-check the domain name validity :
 
-    return render_template('result.html', result=result, record=record, mechanisms=mechanisms)
+		1- Begin and end with alphanumeric characters
+		2- Doesn’t contain any special character except dashes (-) and dots (.)
+		3- Maximum length of each label is 63 characters
+		4- Top-level domain has Min 2 and Max 6 characters 
+		
+	 '''
+    regex = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$'
+    match = re.match(regex,domain_name)
+    
+    if match:
+        result, record, mechanisms = spf_validation(domain_name)
+        return render_template('result.html', result=result, record=record, mechanisms=mechanisms)
+    else :
+        return render_template('view.html' , msg=u' الرجاء كتابة اسم النطاق بشكل صحيح')
+
 
 
 

@@ -29,12 +29,13 @@
           <br>
           <br>
           <br>
-          <form method="post" action="/postdata" name="domainform" onsubmit="return validate()">
+          <form method="post" action="/postdata" name="domainform" onsubmit="return validate()" >
               <div class="form-group">
                   <label for="domain"> <h5> ادخل إسم النطاق</h5> </label>
                   <input type="text" class="form-control" id="domain_name" name="domain_name"  placeholder="example.com" required/>
-                  <div class="domain_error" >
-                        {{ msg }}
+                  <div class="domain_error">
+                        <p> {{ msg }} </p>
+                        <p id="error_msg"> </p>
                   </div>
               </div>
               <br>
@@ -47,17 +48,27 @@
 </html>
 
 <script type="text/javascript">
-
+//onsubmit="return validate()"
       function validate() {
-      //only accept letters, numbers and (.)
-      //string length( min 4 max 30)
+      
+		/* 
+		
+		Only accept a valid domain name :
 
-        var regex = /^[a-z0-9.]{4,30}$/i;
+		1- Begin and end with alphanumeric characters
+		2- Doesn’t contain any special character except dashes (-) and dots (.)
+		3- Maximum length of each label is 63 characters
+		4- Top-level domain has Min 2 and Max 6 characters 
+		
+		*/
+        var regex =  new RegExp('^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$');
         var domain= document.forms["domainform"]["domain_name"].value;
-        if (!(regex.test(domain))) {
-          alert(" الرجاء كتابة اسم النطاق بشكل صحيح ");
+     
+        if (! (regex.test(domain)) ) {
+          document.getElementById("error_msg").innerHTML= " الرجاء كتابة اسم النطاق بشكل صحيح ";
           return false;
         }
+     
       }
 
 </script>
