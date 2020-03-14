@@ -5,9 +5,11 @@ This project is built to validate SPF(Sender Policy Framework)record and display
 هذا المشروع انشئ للتحقق من سجل نظام التعرّف على هوية المرسل التابع للنطاق المدخل وعرض نتيجة التحقق باللغة العربية 
 
 
-![home page](/github-images/homePage.png)
+![home page](/github-images/home.png)
 
-![result](/github-images/validationResult.png)
+![ques](/github-images/ques.png)
+
+![result](/github-images/result.png)
 
  
  
