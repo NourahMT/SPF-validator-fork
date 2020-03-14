@@ -399,7 +399,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return render_template('view.html')
+    return render_template('index.html')
 
 
 @app.route('/postdata', methods=['POST'])
@@ -420,9 +420,9 @@ def result():
     
     if match:
         result, record, mechanisms = spf_validation(domain_name)
-        return render_template('result.html', result=result, record=record, mechanisms=mechanisms)
+        return render_template('resultUI.html', result=result, record=record, mechanisms=mechanisms)
     else :
-        return render_template('view.html' , msg=u' الرجاء كتابة اسم النطاق بشكل صحيح')
+        return render_template('index.html' , msg=u' الرجاء كتابة اسم النطاق بشكل صحيح')
 
 
 
