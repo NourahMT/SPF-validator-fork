@@ -1,4 +1,18 @@
 #!/user/bin/env python3
+# -*- coding: UTF-8 -*-
+
+"""
+
+This tool is built to validate the SPF(Sender Policy Framework) record of a given domain, 
+the validation result is provided in Arabic with explanation of each part of the record mechanisms.
+Also, the tool provides some information about the SPF and its importance.
+
+"""
+
+__author__ = "Nourah Altawallah"
+__email__ = "Naltawallah@gmail.com"
+__license__ = "GPL v3"
+__version__ = "1.0.1"
 
 from flask import Flask, render_template, request, Response
 import re
@@ -7,12 +21,6 @@ from dns import resolver
 from netaddr import *
 from collections import Counter
 
-"""
-
-	This tool is built to validate the SPF(Sender Policy Framework) record of a given domain.
- 
-
-"""
  
 
 def spf_validation(domain):
@@ -420,7 +428,7 @@ def result():
     
     if match:
         result, record, mechanisms = spf_validation(domain_name)
-        return render_template('resultUI.html', result=result, record=record, mechanisms=mechanisms)
+        return render_template('result.html', result=result, record=record, mechanisms=mechanisms)
     else :
         return render_template('index.html' , msg=u' الرجاء كتابة اسم النطاق بشكل صحيح')
 
