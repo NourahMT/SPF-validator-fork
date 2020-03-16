@@ -22,3 +22,8 @@ This project is built to validate SPF(Sender Policy Framework)record and display
 
 * Fahad Alduraibi - Idea and support
 * Nourah Altawallah - Initial work
+
+
+# Contribution:
+
+If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
