@@ -1,13 +1,4 @@
-/**
-* Template Name: Appland - v2.0.0
-* Template URL: https://bootstrapmade.com/free-bootstrap-app-landing-page-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
   color: #585a61;
@@ -491,7 +482,7 @@ section {
 
 
 /*--------------------------------------------------------------
-# Frequently Asked Questions
+# About SPF Questions
 --------------------------------------------------------------*/
 .faq .accordion-list {
   padding: 0 100px;

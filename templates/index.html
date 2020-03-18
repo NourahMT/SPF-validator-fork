@@ -8,14 +8,15 @@
   <title>متحقق سجلات المرسل</title>
 
 
-  <!-- Vendor CSS Files -->
+  <!-- Vendor CSS Files
   <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/icofont/icofont.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}"> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap-rtl.min.css') }}">
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap-rtl.min.css') }}">-->
+
   <!-- Main CSS File -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/vender_style.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
@@ -24,7 +25,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex">
-      
+
       <nav class="nav-menu d-none d-lg-block">
         <ul>
          <!-- <li><a href="#contact">Contact Us</a></li> -->
@@ -45,7 +46,7 @@
         <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
           <div>
             <h1>متحقق سجلّات نظام التعرّف على هوية المرسِل (SPF)</h1>
-            
+
              <!-- ======= Form Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
@@ -114,7 +115,7 @@
                 <a data-toggle="collapse" href="#accordion-list-3" class="collapsed">  <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="accordion-list-3" class="collapse" data-parent=".accordion-list">
                 <p>
-        
+
                 </p>
               </div>
             </li>
@@ -139,43 +140,45 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-       
-  <!-- Vendor JS Files -->
+
+  <!-- Vendor JS Files
   <script src="static/assets/vendor/jquery/jquery.min.js"></script>
 
-  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script> 
+  <script src="static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
 
-  <script src="static/assets/vendor/owl.carousel/owl.carousel.min.js"></script> 
+  <script src="static/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
 
-  <script src="static/assets/vendor/aos/aos.js"></script> 
+  <script src="static/assets/vendor/aos/aos.js"></script>  -->
 
   <!-- Main JS File -->
-  <script src="static/assets/js/main.js"></script>
+   <script src="static/js/vender_js.js"></script>
+  <script src="static/js/main.js"></script>
+
 
   <script type="text/javascript">
- 
+
       function validate() {
-      
-    /* 
-    
+
+    /*
+
     Only accept a valid domain name :
 
     1- Begin and end with alphanumeric characters
     2- Doesn’t contain any special character except dashes (-) and dots (.)
     3- Maximum length of each label is 63 characters
-    4- Top-level domain has Min 2 and Max 6 characters 
-    
+    4- Top-level domain has Min 2 and Max 6 characters
+
     */
         var regex =  new RegExp('^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$');
         var domain= document.forms["domainform"]["domain_name"].value;
-     
+
         if (! (regex.test(domain)) ) {
           document.getElementById("error_msg").innerHTML= " الرجاء كتابة اسم النطاق بشكل صحيح ";
           return false;
         }
-     
+
       }
 
   </script>
