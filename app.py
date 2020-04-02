@@ -23,37 +23,37 @@ from netaddr import *
 from collections import Counter
 import flask
 
-
-print (flask.__version__)
+ 
 
 CRITERIA = { 
 
- 	'dns_lookup': (u'  عدد مرات البحث من الخادم تجاوز الحد ١٠') ,
- 	'no_spf_records' : (u'  عدد السجلات ') , 	
- 	'end_with_all' : (u'ينتهي السجل ب' 'all'), 
- 	'string_length' : (u' تجاوز عدد الأحرف المسموح بها'), 
- 	'use_ptr' : (u'ptr(Pointer) للإشارة إلى إسم النطاق من خلال العنوان'),
-  	'duplicate_ip' : (u' يحتوي على عنواين مكررة')
+ 	'dns_lookup': u'  عدد مرات البحث من الخادم تجاوز الحد ١٠' ,
+ 	'no_spf_records' : u'  عدد السجلات ', 	
+ 	'end_with_all' : u'ينتهي السجل ب' 'all', 
+ 	'string_length' : u' تجاوز عدد الأحرف المسموح بها', 
+ 	'use_ptr' : u'ptr(Pointer) للإشارة إلى إسم النطاق من خلال العنوان',
+  	'duplicate_ip' : u' يحتوي على عنواين مكررة'
 
 }
 
 
 PASS = { 
 
- 	'dns_lookup' : (u'لا') , 
-	'end_with_all' : (u'نعم'), 
-	'string_length' : (u' لا'), 
- 	'duplicate_ip' : (u' لا')
+ 	'dns_lookup' : u'لا', 
+	'end_with_all' : u'نعم', 
+	'string_length' : u' لا', 
+ 	'duplicate_ip' : u' لا'
 	
 }
 
 FAIL = { 
 
-	'dns_lookup' : (u'نعم') , 
-	'no_spf_records' : (u' لا يوجد ') , 
-	'end_with_all' : (u'لا'), 'string_length' : (u' نعم'), 
-	'use_ptr' : ( u'  ينصح بعدم ادراج هذه السجلات') ,
-	'duplicate_ip' : (u' نعم') 
+	'dns_lookup' : u'نعم' , 
+	'no_spf_records' : u' لا يوجد ', 
+	'end_with_all' : u'لا', 
+	'string_length' : u' نعم', 
+	'use_ptr' : u'  ينصح بعدم ادراج هذه السجلات' ,
+	'duplicate_ip' : u' نعم'
 
 
 }
@@ -75,7 +75,7 @@ DNS_QUERY_ERROR = {
 
 MODIFIERS = {
 
-	'+': (u'مسموح'),
+	'+': u'مسموح',
 	'-': u'غير مسموح',
 	'~': u"سماح مشروط",
 	'?': u'طبيعي'
