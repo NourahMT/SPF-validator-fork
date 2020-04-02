@@ -3,3 +3,4 @@
 flask 
 netaddr
 dnspython
+flask_talisman
