@@ -4,8 +4,7 @@
 """
 
 This tool is built to validate the SPF(Sender Policy Framework) record of a given domain, 
-the validation result is provided in Arabic with explanation of each part of the record mechanisms.
-Also, the tool provides some information about the SPF and its importance.
+the validation result is displayed in Arabic.
 
 """
 
